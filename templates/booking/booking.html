@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Записаться на экскурсию {% endblock %}
+
+{% block content %}
+  <div id='booking' class='pageLevel_1'>
+    <br>
+    <h1> на подземную экскурсию</h1>
+    <hr width="90%" size="3px" color="gray">
+    <p style="margin-top:1.4em">Здесь вы можете <a href="#openOrderFormBtn">создать</a> новую заявку на экскурсию{#{% if event_list %}#}, либо <a href="#eventblock">присоединиться</a> к уже существующей группе.{#{% endif %}#}</p>
+    <h2 style="margin-top:1.3em">Исторические подземелья (продолжительность 60 - 70 минут):</h2>
+
+    <div class="tablebooking">
+      <table cols="3">
+        <thead class="aligncenter" style="font-size: 0.9em">
+        <tr class="thead">
+          <td></td><td style="background:#E3C496">Начало первой экскурсии</td><td style="background:#E3C496">Начало последней экскурсии</td>
+        </tr>
+        </thead>
+        <tr>
+          <td style="text-align:right; padding-right:0.6em;">Будни</td><td class="aligncenter">17:00</td><td class="aligncenter">20:00</td>
+        </tr>
+        <tr>
+          <td style="text-align:right; padding-right:0.6em;">Выходные</td><td class="aligncenter">11:00</td><td class="aligncenter">20:00</td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <p>Минимальный размер группы 5, максимальный 12 человек. <br>
+      Даже если Вас меньше пяти и подходящей запланированной экскурсии пока нет, не все потеряно!<br> Вы все равно можете создать заявку и, вполне возможно что кто-то пополнит ваши ряды))</p>
+    <p>Стоимость на одного участника в зависимости от возраста:</p>
+
+    <table cols="5">
+      <tr class="aligncenter" bgcolor="#E3C496" style="font-size: 0.96em">
+        <td style="text-align:right; padding-right:0.6em;">Возраст:</td> <td>17 +</td> <td>12 - 16</td> <td>6 - 11</td> <td>5 и меньше</td>
+      </tr>
+      <tr class="aligncenter" bgcolor="#E3C496">
+        <td style="text-align:right; padding-right:0.6em;">Стоимость:</td> <td>180 грн</td> <td>160 грн</td> <td>90 грн</td> <td>бесплатно</td>
+      </tr>
+    </table>
+    <p style="text-align: center; margin: 1.5em" id="openOrderFormBtn"><a href="#orderForm"><button onclick="openOrderForm()">Выбрать время и создать заявку</button></a></p>
+
+    <div id="orderForm" class="form orderform">
+      <form action="#" method="post">
+        <p>Экскурсия в <select><option selected value="istpodz">Исторические подземелья</option></select></p>
+        <p>Начало <input type="date" name="calendar"> в
+          <select>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+          </select></p>
+        <p>Ваше имя: <input type="text" size="25"></p>
+        <p>Телефон: <input type="tel" name="tel" size="12" maxlength="12"></p>
+        <p>e-mail: <input type="email" size="15"><br>
+        (ваши контактные данные не будут отображены на сайте)</p>
+        <p>Количество человек включая вас: <input type="number" size="2" min="1" max="12" value="5"> </p>
+        <p>К вам могут присоединяться другие участники - <input type="checkbox" name="can_add" value="can_add" checked></p>
+        <p style="text-align:center"><input class="subm" type="submit" onclick="closeOrderForm()" value="Отправить"></p>
+      </form>
+      <div class='modalClose' onclick="closeOrderForm()">x</div>
+    </div>
+
+{#    {% if event_list %}#}
+    {#    {% for event in event_list %}#}
+    <div id="eventblock" class="eventblock">
+
+      <p>Событие: ((Исторические подземелья)){#{{ event.type }}#}. Создал(а): ((InitiatorName)){#{{ event.initiator_name }}#}</p>
+      <p>Начало: ((дд/мм/гг)){#{{ event.start_date }}#} ((деньНедели)){#{{ event.start_weekday }}#}, в ((чч:мм)){#{{event.start_time }}#}</p>
+      <p>Всего участников ((N)){#{{ event.users_number }}#}</p>
+
+      <div style="text-align: center"><button>присоединиться</button></div>
+
+{#      <div id="addform" class="form addform">#}
+{#        <form action="#" method="post">#}
+{#          <p>Ваше имя: <input type="text" size="25"></p>#}
+{#          <p>Телефон: <input type="tel" name="tel" size="12" maxlength="12"></p>#}
+{#          <p>e-mail: <input type="email" size="15"><br>#}
+{#          (ваши контактные данные не будут отображены на сайте)</p>#}
+{#          <p>Количество человек включая вас: <input type="number" size="2" min="1" max="12" value="5"> </p>#}
+{#          <p style="text-align:center"><input type="submit" value="Отправить"></p>#}
+{#        </form>#}
+{#      </div>#}
+
+      <div class="addblock">
+        {#      {% if added_list %}#}
+        <p>В том числе:</p>
+        {#        {% for added in added_list %}#}
+
+        <p class="bookaddedevent textp">((дд/мм/гг)){#{{ added.created_datetime }}#} присоединился участник ((InitiatorName)){#{{ added.initiator_name }} {% if added.users_number > 1 %}#} и еще ((N-1)){#{{ added.users_number - 1 }}#}.{#{% endif %}#}
+        </p>
+
+        {#        {% endfor %}#}
+        {#      {% endif %}#}
+      </div>
+    </div>
+    {#    {% endfor %}#}
+{#  {% endif %}#}
+
+  </div>
+
+{% endblock content %}
+

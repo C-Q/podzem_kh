@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {{ article_object.title }} {% endblock %}
+
+{% block content %}
+
+  <div id='{{ article_object.article_url }}' class='article'>
+    <br>
+    <p class="author">{{ article_object.author }}</p>
+
+    <h1>{{ article_object.title }}</h1>
+    <br><br>
+
+    {{ article_body }}
+  </div>
+
+{% endblock content %}

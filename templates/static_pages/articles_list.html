@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Статьи, фотоотчеты, исторические справки {% endblock %}
+
+{% block content %}
+  <div id='articles' class='pageLevel_1'>
+    <br>
+    <h1> о подземельях - статьи, фотоотчеты, исторические справки</h1>
+  <hr width="90%" size="3px" color="gray">
+    <br>
+
+    <nav>
+      <form action="{% url 'articles' %}" method="post">
+        {% csrf_token %}
+        {{ filterform }}
+        <noscript><input type="submit" value="Отфильтровать"></noscript>
+      </form>
+    </nav>
+    <br>
+    <br>
+
+    <div class="tablearticlist">
+      <table cols="2">
+        <thead align="center" bgcolor="#E3C496">
+        <tr>
+          <td class="title">Название</td>
+          <td>Авторы</td>
+        </tr>
+        </thead>
+        {% for article in artic_list %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="/articles/{{ article.article_url }}">{{ article.title }}</a></td>
+            <td class="aligncenter">{{ article.author }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </div>
+{% endblock content %}

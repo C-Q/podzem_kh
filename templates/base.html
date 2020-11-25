@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+  <meta http-equiv='Content-Type' charset="UTF-8">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content='Экскурсии и квесты в старинных подземельях и в "спортивных" пещерах в Харькове. Сайт создан спелеологами которые посвящают себя поиску и научному изучению старинных подземных объектов и прочих древностей. А еще мы увлеченно и увлекательно об этом рассказываем'>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Caveat:400,700|El+Messiri:400,500|Kurale|Pangolin&amp;subset=cyrillic">
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+  <script type="text/javascript" src="{% static 'js/jquery-1.2.6.js' %}"></script>
+
+  <title>{% block title %} {{ page_title }} {% endblock %}</title>
+
+  <style>{% block style %} {% endblock %}</style>
+
+</head>
+
+<body>
+<div id='menu_appear' onclick='menuClick()'>></div>
+
+<div id='slider'>
+  <div id='slideIn'>
+
+    <div id='sl_left' class='slide' onmouseover='opacL_over()' onmouseout='opacL_out()'>
+      <div id='sl_button_left'>&#171;</div>
+    </div>
+
+    <div id='sl_right' class='slide' onmouseover='opacR_over()' onmouseout='opacR_out()'>
+      <div id='sl_button_right'>&#187;</div>
+    </div>
+
+    <div class='modalClose'>x</div>
+    <img src="#" onload='adaptiveSL()'>
+  </div>
+</div>
+
+<div class='grid'>
+
+  <div class='grid_header'>
+    <div class='header'>
+      <p>Подземный Харьков<br> Мир, которого Вы не знали</p>
+      <div class='phones'>
+        <div>Записаться на экскурсию:</div>
+        <div>
+          <div id='vodafone' title='Vodafone'></div>
+          <div class='numbers' title='Vodafone'>(066)784-14-46</div>
+        </div>
+        <div>
+          <div id='kievstar' title='Kievstar'></div>
+          <div class='numbers' title='Kievstar'>(067)375-18-65</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id='menu' class= 'grid_left'>
+    <div class='logo' id='logo'>
+      <a href= "{% url 'index' %}"><img src= "{% static 'img/logo.png' %}" title='На главную' alt='Не удалось загрузить логотип'></a>
+    </div>
+    <div class='menu'>
+      <ul>
+        <li>
+          <a href="{% url 'index' %}" id='to_main'>Главная</a>
+        </li>
+        <li>
+          <a href="{% url 'ist_podz' %}" id='to_ist_podz' title='Экскурсия в старинный подземный ход в центральной части города' {{ ist_podz_highlight }}>ИСТОРИЧЕСКИЕ ПОДЗЕМЕЛЬЯ</a>
+        </li>
+        <li>
+          <a href="{% url 'cave_quest' %}" id='to_cave_quest' title='Локация за пределами города' {{ cave_quest_highlight }}>КВЕСТ В ПЕЩЕРНЫХ ЛАБИРИНТАХ</a>
+        </li>
+        <li>
+          <a href="{% url 'booking' %}" id='to_booking' title="Go на экскурсию!" {{ booking_highlight }}>ЗАПИСАТЬСЯ</a>
+        </li>
+        <li>
+          <a href="{% url 'briefing' %}" id='to_briefing' title='Что одеть, что взять, чего ждать' {{ briefing_highlight }}>ИНСТРУКТАЖ</a>
+        </li>
+        <li>
+          <a href="{% url 'safety_rules' %}" id='to_safety_rules' title='Must have!' {{ safety_highlight }}>ТЕХНИКА БЕЗОПАСНОСТИ</a>
+        </li>
+        <li>
+          <a href="{% url 'articles' %}" id='to_articles' title='Статьи и фотоотчеты' {{ articles_highlight }}>ЛЮБОЗНАТЕЛЬНЫМ</a>
+        </li>
+        <li>
+          <a href="{% url 'questions' %}" id='to_questions' title='Если есть, заходим...' {{ questions_highlight }}>ВОПРОСЫ</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class='grid_content'>
+    <div class='content_backgr'>
+      <div id='content_backgr0'></div>
+      <div id='content_backgr1'></div>
+      <div id='content_backgr2'></div>
+    </div>
+    <div class='content'>
+      {% block content %} {{ page_content }} {% endblock %}
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="{% static 'js/configuration.js' %}"></script>
+</body>
+</html>
