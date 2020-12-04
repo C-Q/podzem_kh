@@ -70,9 +70,10 @@ WSGI_APPLICATION = 'podzem_kh.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.path.join(BASE_DIR, 'db.myd'),
-        'USER': 'lento',
-        'PASSWORD': '142536'
+        'NAME': 'podz',
+        'USER': 'a_user',
+        'HOST': 'localhost',
+        'PASSWORD': 'qwe-123+zxc',
     }
 }
 
