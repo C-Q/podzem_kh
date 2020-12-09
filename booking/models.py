@@ -8,7 +8,7 @@ class Event(models.Model):
     initiator_name = models.CharField('Инициатор', max_length=50)
     initiator_phone = models.CharField('Тел.', max_length=14)
     initiator_email = models.EmailField('e-mail', max_length=254, blank=True)
-    initiator_istelegram = models.BooleanField('Телега?', blank=True)
+    initiator_istelegram = models.BooleanField('Телега?', blank=True, default=True)
     users_number = models.IntegerField('Участников')
     allow_join = models.BooleanField('Можно + ', default=True)
     approved = models.BooleanField('Одобрено', default=False)
@@ -22,7 +22,7 @@ class Added(models.Model):
     initiator_name = models.CharField('Инициатор', max_length=50)
     initiator_phone = models.CharField('Телефон', max_length=14)
     initiator_email = models.EmailField('e-mail', max_length=254)
-    initiator_istelegram = models.BooleanField('Телега?', blank=True)
+    initiator_istelegram = models.BooleanField('Телега?', blank=True, default=True)
     users_number = models.IntegerField()
 
 
