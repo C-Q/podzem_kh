@@ -21,8 +21,8 @@ class Added(models.Model):
     created_datetime = models.DateTimeField('Создано', auto_now=True)
     initiator_name = models.CharField('Инициатор', max_length=50)
     initiator_phone = models.CharField('Телефон', max_length=14)
-    initiator_email = models.EmailField('e-mail', max_length=254)
+    initiator_email = models.EmailField('e-mail', max_length=254, blank=True)
     initiator_istelegram = models.BooleanField('Телега?', blank=True, default=True)
-    users_number = models.IntegerField()
+    users_number = models.IntegerField('Присоединилось')
 
 
